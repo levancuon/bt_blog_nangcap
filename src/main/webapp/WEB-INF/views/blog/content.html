@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Blog content</title>
+</head>
+<body>
+<h1>Blog List</h1>
+<a th:href="@{/blog}">Back to list Blog</a>
+<table border="1">
+    <tr >
+        <td>category</td>
+        <td>Content</td>
+    </tr>
+    <tr th:object="${blog}">
+        <td th:text="${blog.category.name}"></td>
+        <td th:text="${blog.getContent()}"></td>
+    </tr>
+</table>
+</body>
+</html>

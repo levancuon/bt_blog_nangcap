@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Categories List</title>
+</head>
+<body>
+<h1>Categories List</h1>
+<a th:href="@{/category/create}">Create New Category</a> <br>
+<div style="margin-bottom: 10px; margin-left: 110px">
+    <form th:action="@{/category/search}" method="get">
+        <label><input type="text" name="search"></label>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
+<table border="1">
+    <tr>
+        <td>stt</td>
+        <td>Category</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr th:each="c,bCount : ${categories}">
+        <td th:text="${bCount.count}"></td>
+        <td><a th:href="@{/blog/{id}(id=${c.getId()})}" th:text="${c.name}"></a></td>
+        <td><a th:href="@{/category/edit/{id}(id=${c.getId()})}">edit</a></td>
+        <td><a th:href="@{/category/delete/{id}(id=${c.getId()})}">delete</a></td>
+    </tr>
+</table>
+<a class="btn btn-primary" th:if="${categories.hasPrevious()}"
+   th:href="@{/category(page=${categories.number - 1})}">Previous</a>
+<span th:text="${categories.number + 1}"></span> | <span th:text="${categories.totalPages}"></span>
+<a class="btn btn-primary" th:if="${categories.hasNext()}"
+   th:href="@{/category(page=${categories.number + 1})}">Next</a>
+</body>
+</html>
